@@ -39,9 +39,9 @@ export class UsersService {
 
       for (const user of externalUsers) {
         await this.prismaService.user.upsert({
-          where: { email: user.email }, // קריטריון ייחודי
+          where: { email: user.email },
           update: {
-            password: 'external', // סיסמה דמה כי אין להם סיסמה
+            password: 'external',
           },
           create: {
             email: user.email,
@@ -55,9 +55,5 @@ export class UsersService {
       console.error(err);
       throw new Error('Failed to import users');
     }
-  }
-  async OnModuleInit() {
-    console.log('UsersService loaded – importing users...');
-    await this.importUsersFromExternalApi();
   }
 }
